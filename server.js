@@ -4,7 +4,7 @@ const path = require("path");
 
 const PORT = Number(process.env.PORT) || 3000;
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
-const MAIL_TO = process.env.MAIL_TO || "maxime@maximefarineau.com";
+const MAIL_TO = process.env.MAIL_TO || "contact@maximefarineau.com";
 const MAIL_FROM = process.env.MAIL_FROM || "Farineau <bonjour@maximefarineau.com>";
 
 const TYPES = {
