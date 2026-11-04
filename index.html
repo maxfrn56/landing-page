@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Farineau — Landing 400 €, site vitrine 600 €</title>
+  <meta name="description" content="Landing page à 400 € ou site vitrine à 600 €. Design, version mobile, formulaire et mise en ligne dans la journée. Règlement à la livraison.">
+  <meta name="theme-color" content="#f3f0e8">
+  <meta property="og:title" content="Farineau — Landing 400 €, site vitrine 600 €">
+  <meta property="og:description" content="Landing page à 400 €, site vitrine à 600 €. Livré dans la journée, payé à la livraison.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%231c3a30'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia' font-size='16' fill='%23f3f0e8'%3EF%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,560;1,9..144,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Landing page ou site vitrine livré dans la journée",
+    "provider": { "@type": "Person", "name": "Maxime Farineau" },
+    "areaServed": "FR",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Landing page",
+        "price": "400",
+        "priceCurrency": "EUR",
+        "description": "Landing page livrée dans la journée, réglée à la livraison."
+      },
+      {
+        "@type": "Offer",
+        "name": "Site vitrine",
+        "price": "600",
+        "priceCurrency": "EUR",
+        "description": "Site vitrine livré dans la journée, réglé à la livraison."
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f3f0e8;
+      --bg-deep: #e7e2d6;
+      --card: #faf8f4;
+      --ink: #161513;
+      --muted: #645f56;
+      --faint: #8a847a;
+      --line: rgba(22, 21, 19, 0.14);
+      --line-strong: rgba(22, 21, 19, 0.28);
+      --forest: #1c3a30;
+      --forest-2: #142820;
+      --cream: #f6f3ec;
+      --serif: "Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+      --sans: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
+      --header: 4.6rem;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 1.02rem;
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+    }
+    body.nav-open { overflow: hidden; }
+    img { max-width: 100%; display: block; }
+    button, input, textarea, select { font: inherit; color: inherit; }
+    a { color: inherit; }
+    ::selection { background: var(--forest); color: var(--cream); }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 80;
+      pointer-events: none;
+      opacity: 0.14;
+      mix-blend-mode: multiply;
+    }
+
+    .setup {
+      position: relative;
+      z-index: 90;
+      display: none;
+      background: var(--forest);
+      color: var(--cream);
+      padding: 0.85rem 1.25rem;
+      text-align: center;
+      font-size: 0.92rem;
+    }
+    .setup.is-on { display: block; }
+    .setup code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.84em;
+    }
+
+    .wrap {
+      width: min(1140px, calc(100% - 2.4rem));
+      margin-inline: auto;
+    }
+    .wrap-l {
+      width: min(1240px, calc(100% - 2.4rem));
+      margin-inline: auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--header);
+      display: flex;
+      align-items: center;
+      background: #f3f0e8;
+      transition: border-color 0.35s var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    .header.is-on {
+      background: #f3f0e8;
+      border-bottom-color: var(--line);
+    }
+    .header .wrap-l {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: min(1240px, calc(100% - 2.4rem));
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      line-height: 1;
+      gap: 0.28rem;
+    }
+    .brand strong {
+      font-family: var(--serif);
+      font-weight: 560;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+    .brand span {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav a {
+      text-decoration: none;
+      font-size: 0.94rem;
+      color: var(--muted);
+    }
+    .nav a:hover { color: var(--ink); }
+    .nav-toggle {
+      display: none;
+      width: 2.75rem;
+      height: 2.75rem;
+      border: 1px solid var(--line-strong);
+      background: transparent;
+      border-radius: 999px;
+      padding: 0;
+      cursor: pointer;
+    }
+    .nav-toggle span,
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      display: block;
+      width: 1rem;
+      height: 1px;
+      background: var(--ink);
+      position: relative;
+      margin-inline: auto;
+    }
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+    .nav-toggle span::before { top: -5px; }
+    .nav-toggle span::after { top: 5px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      background: var(--forest);
+      color: var(--cream);
+      border-radius: 999px;
+      padding: 0.95rem 1.3rem;
+      font-size: 0.96rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+    .btn:hover { background: var(--forest-2); }
+    .btn:focus-visible, a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--forest);
+      outline-offset: 3px;
+    }
+    .btn svg { width: 0.95rem; height: 0.95rem; }
+    .btn-line {
+      background: transparent;
+      color: var(--ink);
+      box-shadow: inset 0 0 0 1px var(--line-strong);
+    }
+    .btn-line:hover { background: rgba(22, 21, 19, 0.04); }
+    .btn-light {
+      background: var(--cream);
+      color: var(--forest);
+    }
+    .btn-light:hover { background: white; }
+
+    .hero { padding: 2.2rem 0 4.5rem; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+      gap: 3.5rem;
+      align-items: end;
+    }
+    .kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem 0.8rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+    .kicker i {
+      width: 2.2rem;
+      height: 1px;
+      background: var(--line-strong);
+      display: inline-block;
+      font-style: normal;
+    }
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(3.35rem, 7.3vw, 6.7rem);
+      line-height: 0.9;
+      letter-spacing: -0.045em;
+      font-optical-sizing: auto;
+    }
+    h1 em {
+      font-style: italic;
+      font-weight: 500;
+    }
+    .lead {
+      max-width: 38rem;
+      margin: 1.6rem 0 0;
+      font-size: 1.16rem;
+      line-height: 1.5;
+      color: var(--ink);
+      font-weight: 300;
+    }
+    .lead strong { font-weight: 560; }
+    .slot {
+      margin: 1.15rem 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.8rem;
+    }
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.6rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--line);
+    }
+    .facts b {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .facts span {
+      display: block;
+      margin-top: 0.4rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .specimen { position: relative; }
+    .specimen figcaption {
+      margin-top: 0.85rem;
+      color: var(--faint);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    a.browser {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.25s var(--ease);
+    }
+    a.browser:hover { transform: translateY(-3px); }
+    .browser {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 1.15rem;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(22, 21, 19, 0.07);
+    }
+    .screen-marine {
+      background: #14343a;
+      color: #f4efe4;
+    }
+    .screen-marine .mini-nav b,
+    .screen-marine h2 { color: #f4efe4; }
+    .screen-marine .mini-nav,
+    .screen-marine p { color: rgba(244, 239, 228, 0.74); }
+    .screen-marine .pill { background: #f4efe4; color: #14343a; }
+    .screen-marine .mini-meta { color: rgba(244, 239, 228, 0.55); }
+    .chrome {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 0.9rem;
+      border-bottom: 1px solid var(--line);
+      background: #f6f3ec;
+    }
+    .chrome i {
+      width: 0.48rem;
+      height: 0.48rem;
+      border-radius: 50%;
+      background: #d5cfc3;
+      display: block;
+    }
+    .chrome em {
+      margin-left: 0.55rem;
+      font-style: normal;
+      font-size: 0.75rem;
+      color: var(--faint);
+      letter-spacing: 0.02em;
+    }
+    .screen { padding: 1.35rem 1.3rem 1.45rem; }
+    .mini-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .mini-nav b {
+      font-family: var(--serif);
+      font-weight: 560;
+      letter-spacing: -0.03em;
+      font-size: 0.95rem;
+      text-transform: none;
+      color: var(--ink);
+    }
+    .screen h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin: 1.5rem 0 0.8rem;
+    }
+    .screen h2 em { font-style: italic; }
+    .screen p {
+      margin: 0;
+      max-width: 18rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 300;
+    }
+    .mini-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-top: 1.6rem;
+    }
+    .pill {
+      display: inline-flex;
+      border-radius: 999px;
+      background: var(--forest);
+      color: var(--cream);
+      font-size: 0.75rem;
+      padding: 0.45rem 0.7rem;
+    }
+    .mini-meta {
+      text-align: right;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--faint);
+      line-height: 1.45;
+    }
+
+    section { scroll-margin-top: calc(var(--header) + 0.8rem); }
+    .block { padding: 5.2rem 0; }
+    .block-deep {
+      background: var(--bg-deep);
+      border-block: 1px solid var(--line);
+    }
+    .index {
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 1rem;
+    }
+    h2.display {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(2.3rem, 4.6vw, 4rem);
+      letter-spacing: -0.04em;
+      line-height: 0.96;
+    }
+    .intro {
+      max-width: 38rem;
+      color: var(--muted);
+      font-weight: 300;
+      font-size: 1.08rem;
+      margin: 1rem 0 0;
+    }
+
+    .offers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2.4rem;
+    }
+    .offer {
+      text-align: left;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      border-radius: 1.2rem;
+      padding: 1.5rem 1.4rem 1.35rem;
+      cursor: pointer;
+      transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+    .offer:hover { border-color: var(--ink); }
+    .offer.is-on {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+    .offer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: baseline;
+    }
+    .offer h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 2rem;
+      letter-spacing: -0.03em;
+    }
+    .offer .price {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em;
+      font-size: 0.92rem;
+    }
+    .offer ul {
+      margin: 1.15rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .offer li {
+      padding: 0.48rem 0;
+      border-top: 1px solid var(--line);
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .offer.is-on li {
+      border-top-color: rgba(246, 243, 236, 0.16);
+      color: rgba(246, 243, 236, 0.78);
+    }
+    .offer .choose {
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 2.5rem;
+    }
+    .cols h3 {
+      margin: 0 0 0.8rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .cols ul, .need ul { margin: 0; padding: 0; list-style: none; }
+    .cols li, .need li {
+      padding: 0.72rem 0;
+      border-top: 1px solid var(--line);
+      font-size: 1rem;
+    }
+    .note {
+      margin-top: 1.6rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 40rem;
+    }
+
+    .day {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 3rem;
+    }
+    .timeline { margin: 0; padding: 0; list-style: none; }
+    .timeline li {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      gap: 1rem;
+      padding: 1.15rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .timeline time {
+      font-variant-numeric: tabular-nums;
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding-top: 0.2rem;
+    }
+    .timeline h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 1.65rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+    .timeline p { margin: 0.25rem 0 0; color: var(--muted); font-weight: 300; }
+    .need {
+      margin-top: 1.5rem;
+      padding: 1.2rem 1.2rem 0.4rem;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: rgba(250, 248, 244, 0.55);
+    }
+    .need h3 {
+      margin: 0 0 0.35rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .price-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+    }
+    .amount {
+      margin: 0.4rem 0 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(5rem, 12vw, 8.5rem);
+      letter-spacing: -0.06em;
+      line-height: 0.85;
+    }
+    .amount small {
+      font-size: 0.34em;
+      letter-spacing: 0;
+      margin-left: 0.15em;
+    }
+    .price-pair {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem 2.6rem;
+      margin-top: 0.4rem;
+    }
+    .price-pair p { margin: 0; }
+    .price-pair b {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(3.6rem, 8vw, 6.2rem);
+      letter-spacing: -0.055em;
+      line-height: 0.85;
+    }
+    .price-pair small {
+      font-size: 0.4em;
+      letter-spacing: 0;
+      margin-left: 0.12em;
+    }
+    .price-pair span {
+      display: block;
+      margin-top: 0.45rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .pay-steps { margin: 0; padding: 0; list-style: none; }
+    .pay-steps li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .pay-steps strong {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+    .pay-steps p { margin: 0.15rem 0 0; color: var(--muted); font-weight: 300; }
+    .price-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.4rem; }
+
+    .faq { margin-top: 2rem; border-top: 1px solid var(--line); }
+    details { border-bottom: 1px solid var(--line); }
+    summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.15rem 0;
+      font-size: 1.12rem;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+";
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--muted);
+    }
+    details[open] summary::after { content: "–"; }
+    details p {
+      margin: 0;
+      padding: 0 2rem 1.2rem 0;
+      max-width: 42rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .form {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 1.25rem;
+      padding: 1.4rem;
+      box-shadow: 0 24px 60px rgba(22, 21, 19, 0.05);
+    }
+    .fields { display: grid; gap: 0.9rem; }
+    .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    label {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    input, textarea, select {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line-strong);
+      border-radius: 0;
+      padding: 0.55rem 0 0.65rem;
+      outline: none;
+    }
+    textarea { min-height: 6.5rem; resize: vertical; }
+    input:focus, textarea:focus, select:focus { border-bottom-color: var(--ink); }
+    .check {
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .check input { width: auto; margin-top: 0.25rem; accent-color: var(--forest); }
+    .form-foot {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.1rem;
+    }
+    .form-error {
+      display: none;
+      color: #7c2f2a;
+      font-size: 0.92rem;
+      margin: 0.75rem 0 0;
+    }
+    .form-error.is-on { display: block; }
+    .success {
+      display: none;
+      padding: 0.4rem 0.2rem 0.2rem;
+    }
+    .success.is-on { display: block; }
+    .success h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 2.2rem;
+      letter-spacing: -0.03em;
+    }
+    .success p { color: var(--muted); font-weight: 300; }
+    .recap {
+      white-space: pre-wrap;
+      background: var(--bg);
+      border-radius: 0.8rem;
+      padding: 1rem;
+      font-family: var(--sans);
+      font-size: 0.92rem;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+    .form.is-done .fields,
+    .form.is-done .form-foot,
+    .form.is-done .form-error { display: none; }
+
+    footer {
+      padding: 1.6rem 0 6.5rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 1.1rem;
+    }
+    footer a { color: var(--ink); }
+
+    .dock {
+      display: none;
+      position: fixed;
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: 0.75rem;
+      z-index: 45;
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 1rem;
+      padding: 0.7rem 0.7rem 0.7rem 1rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      box-shadow: 0 16px 40px rgba(22, 21, 19, 0.22);
+    }
+    .dock b {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .dock span { color: rgba(246, 243, 236, 0.68); font-size: 0.8rem; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .split, .day, .price-layout, .contact-grid, .offers, .cols, .duo {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding-top: 1.2rem; }
+      .nav {
+        display: none;
+        position: absolute;
+        top: var(--header);
+        left: 0;
+        right: 0;
+        z-index: 2;
+        background: #f3f0e8;
+        border-bottom: 1px solid var(--line);
+        padding: 0.4rem 1.2rem 1.1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+      }
+      .nav.is-open { display: flex; }
+      .nav a { padding: 0.7rem 0; font-size: 1.15rem; color: var(--ink); }
+      .nav .btn { width: 100%; margin-top: 0.4rem; }
+      .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+      .dock.is-on { display: flex; }
+      .facts { grid-template-columns: 1fr; gap: 0.85rem; }
+      .facts div { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+      .facts span { margin-top: 0; }
+      h1 { font-size: clamp(3.1rem, 14vw, 4.4rem); }
+      .block { padding: 3.6rem 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="grain" aria-hidden="true">
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain)"/>
+  </svg>
+
+  <div class="setup" id="setup">
+    Avant d’envoyer cette page à un client : ouvrez <code>index.html</code>, cherchez <code>CONFIG</code>, et indiquez votre email. Le bandeau disparaît ensuite.
+  </div>
+
+  <header class="header" id="header">
+    <div class="wrap-l">
+      <a class="brand" href="#top">
+        <strong>Farineau</strong>
+        <span>Sites en une journée</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu" id="navToggle">
+        <span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="#offre">L’offre</a>
+        <a href="#perimetre">Périmètre</a>
+        <a href="#journee">La journée</a>
+        <a href="#tarif">Tarif</a>
+        <a class="btn" href="#contact">Démarrer</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap-l hero-grid">
+        <div>
+          <p class="kicker"><i></i> Landing page ou site vitrine</p>
+          <h1>Votre site,<br><em>livré aujourd’hui.</em></h1>
+          <p class="lead">Une landing page à <strong>400&nbsp;€</strong>, ou un site vitrine à <strong>600&nbsp;€</strong>, mis en ligne le jour de la commande. Réglé à la livraison.</p>
+          <p class="slot" id="slot">Livré dans la journée.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#contact">Démarrer aujourd’hui
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+            </a>
+            <a class="btn btn-line" href="#offre">Voir les deux formats</a>
+          </div>
+          <div class="facts">
+            <div><b>400&nbsp;€</b><span>landing page</span></div>
+            <div><b>600&nbsp;€</b><span>site vitrine</span></div>
+            <div><b>1 jour</b><span>payé à la livraison</span></div>
+          </div>
+        </div>
+
+        <figure class="specimen">
+          <a class="browser" href="https://www.lamarine-quiberon.fr/" target="_blank" rel="noopener">
+            <div class="chrome"><i></i><i></i><i></i><em>Dernier projet réalisé</em></div>
+            <div class="screen screen-marine">
+              <div class="mini-nav"><b>La Marine</b><span>Quiberon</span></div>
+              <h2>Un siècle<br><em>face à l’océan.</em></h2>
+              <p>Bistrot de la mer depuis 1915, face au port Maria.</p>
+              <div class="mini-row">
+                <span class="pill">Voir le site</span>
+                <div class="mini-meta">Port Maria<br>depuis 1915</div>
+              </div>
+            </div>
+          </a>
+          <figcaption>La Marine · Restaurant à Quiberon</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block" id="offre">
+      <div class="wrap">
+        <p class="index">01 — L’offre</p>
+        <h2 class="display">Deux formats.<br>Deux tarifs.</h2>
+        <p class="intro">Landing page à 400&nbsp;€, site vitrine à 600&nbsp;€. Le délai reste celui de la journée, dès lors que les contenus sont prêts et que la structure tient dans le périmètre.</p>
+        <div class="offers" role="list">
+          <button class="offer is-on" type="button" data-offer="Landing page" aria-pressed="true">
+            <div class="offer-top">
+              <h3>Landing</h3>
+              <span class="price">400&nbsp;€</span>
+            </div>
+            <ul>
+              <li>Une page unique, tenue du premier écran au formulaire</li>
+              <li>Idéale pour une offre, une ouverture, une prise de rendez-vous</li>
+              <li>Un appel à l’action, clair, répété aux bons endroits</li>
+              <li>Mise en ligne le jour même</li>
+            </ul>
+            <div class="choose">Format retenu</div>
+          </button>
+          <button class="offer" type="button" data-offer="Site vitrine" aria-pressed="false">
+            <div class="offer-top">
+              <h3>Vitrine</h3>
+              <span class="price">600&nbsp;€</span>
+            </div>
+            <ul>
+              <li>Jusqu’à quatre pages courtes</li>
+              <li>Accueil, offre, à propos, contact — ou une autre répartition</li>
+              <li>Pour un commerce, un cabinet, un atelier, un indépendant</li>
+              <li>Mise en ligne le jour même</li>
+            </ul>
+            <div class="choose">Choisir ce format</div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block block-deep" id="perimetre">
+      <div class="wrap split">
+        <div>
+          <p class="index">02 — Périmètre</p>
+          <h2 class="display">Tout ce qu’il faut pour ouvrir. Rien qui alourdisse la journée.</h2>
+        </div>
+        <div>
+          <div class="cols">
+            <div>
+              <h3>Inclus</h3>
+              <ul>
+                <li>Direction visuelle dédiée à votre activité</li>
+                <li>Landing, ou vitrine jusqu’à 4 pages</li>
+                <li>Version téléphone et ordinateur</li>
+                <li>Formulaire relié à votre email</li>
+                <li>Titre, description, image de partage</li>
+                <li>Mise en ligne et accès transmis</li>
+                <li>Un cycle de corrections</li>
+                <li>Le site vous appartient</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Sur devis, à part</h3>
+              <ul>
+                <li>Logo créé de zéro</li>
+                <li>Boutique et paiement en ligne</li>
+                <li>Rédaction longue, ton de marque travaillé</li>
+                <li>Au-delà de quatre pages</li>
+                <li>Photographies achetées</li>
+                <li>Corrections supplémentaires</li>
+                <li>Maintenance au mois</li>
+              </ul>
+            </div>
+          </div>
+          <p class="note">Les textes courts et les titres sont écrits à partir de votre brief. Vos photos sont les bienvenues. Sans photos, la page est composée avec des visuels sobres, libres de droits. Le nom de domaine, s’il faut l’acheter, reste à votre charge&nbsp;: en général 10 à 15&nbsp;€ par an.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="journee">
+      <div class="wrap day">
+        <div>
+          <p class="index">03 — La journée</p>
+          <h2 class="display">Un créneau. Une validation. Le site en ligne.</h2>
+          <p class="intro">Commande confirmée avant 11&nbsp;h, avec les contenus&nbsp;: mise en ligne le soir. Après 11&nbsp;h, le même enchaînement se termine le lendemain avant midi.</p>
+          <div class="need">
+            <h3>Ce qu’il me faut de vous</h3>
+            <ul>
+              <li>L’activité, la ville, et l’offre à mettre en avant</li>
+              <li>Les pages souhaitées</li>
+              <li>Textes et photos, même à l’état brut</li>
+              <li>Une validation rapide dans la journée</li>
+            </ul>
+          </div>
+        </div>
+        <ol class="timeline">
+          <li>
+            <time>09:00</time>
+            <div>
+              <h3>Brief</h3>
+              <p>Vous envoyez l’essentiel. Je réponds sous une heure avec le cadre et le délai exact.</p>
+            </div>
+          </li>
+          <li>
+            <time>11:00</time>
+            <div>
+              <h3>Direction</h3>
+              <p>Structure des pages et atmosphère. Vous validez en une réponse. Le travail de réalisation part de là.</p>
+            </div>
+          </li>
+          <li>
+            <time>16:00</time>
+            <div>
+              <h3>Version</h3>
+              <p>Le site est consultable sur une adresse de prévisualisation. Vous notez les corrections du cycle inclus.</p>
+            </div>
+          </li>
+          <li>
+            <time>19:00</time>
+            <div>
+              <h3>Publication</h3>
+              <p>Le forfait est réglé à la mise en ligne, 400&nbsp;€ ou 600&nbsp;€ selon le format, par virement ou par carte. Le site passe ensuite sur votre domaine, ou sur une adresse propre en attendant de l’acheter.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="block block-deep" id="tarif">
+      <div class="wrap price-layout">
+        <div>
+          <p class="index">04 — Tarif</p>
+          <div class="price-pair">
+            <p><b>400<small>€</small></b><span>Landing page</span></p>
+            <p><b>600<small>€</small></b><span>Site vitrine</span></p>
+          </div>
+          <p class="intro">Livré dans la journée. Réglé à la livraison. Aucun abonnement, aucun frais d’outil répercuté.</p>
+        </div>
+        <div>
+          <ul class="pay-steps">
+            <li>
+              <strong>1 fois</strong>
+              <div>
+                <b>Réglé à la livraison</b>
+                <p>400&nbsp;€ pour une landing, 600&nbsp;€ pour une vitrine. Virement ou carte, à la mise en ligne.</p>
+              </div>
+            </li>
+          </ul>
+          <div class="price-actions">
+            <a class="btn" href="#contact">Commander</a>
+            <a class="btn btn-line" id="payLink" href="#contact" hidden>Payer la commande</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="questions">
+      <div class="wrap">
+        <p class="index">05 — Questions</p>
+        <h2 class="display">Avant de commander.</h2>
+        <div class="faq">
+          <details>
+            <summary>Je n’ai presque pas de textes.</summary>
+            <p>Envoyez quelques phrases sur ce que vous faites, pour qui, et dans quelle ville. J’en tire les titres et les paragraphes courts. Un texte long, ou un ton de marque à travailler en profondeur, se chiffre à part — je vous le dis avant de commencer.</p>
+          </details>
+          <details>
+            <summary>Je n’ai pas de photos professionnelles.</summary>
+            <p>La page se compose quand même. Vos images de téléphone, si elles sont nettes, suffisent souvent. Sinon j’utilise des visuels libres de droits, choisis pour rester discrets.</p>
+          </details>
+          <details>
+            <summary>Je n’ai pas encore de nom de domaine.</summary>
+            <p>Le site sort d’abord sur une adresse de prévisualisation, puis sur une adresse propre. L’achat du domaine se fait à votre nom. Je vous indique la marche à suivre, comptez une dizaine d’euros par an.</p>
+          </details>
+          <details>
+            <summary>Combien de modifications sont incluses&nbsp;?</summary>
+            <p>Un cycle, le jour de la livraison&nbsp;: vous regroupez vos retours, je les intègre. Une nouvelle direction visuelle, ou des ajouts de pages, sortent du forfait.</p>
+          </details>
+          <details>
+            <summary>À qui appartient le site&nbsp;?</summary>
+            <p>À vous. Vous recevez les fichiers, les accès à l’hébergement et au domaine. Aucun abonnement ne vous retient ici.</p>
+          </details>
+          <details>
+            <summary>Je veux une boutique.</summary>
+            <p>Le forfait du jour couvre une landing ou une vitrine. Une boutique, un paiement en ligne ou un espace client font l’objet d’un autre cadre, annoncé avant tout travail.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="block block-deep" id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="index">06 — Commander</p>
+          <h2 class="display">Écrivez avant 11&nbsp;h. Le site peut être en ligne ce soir.</h2>
+          <p class="intro" id="replyLine">Je réponds sous une heure. Le forfait se règle à la mise en ligne, le jour même.</p>
+          <p class="intro" id="directLine"></p>
+        </div>
+        <form class="form" id="form" novalidate>
+          <div class="fields">
+            <div class="duo">
+              <label>Nom
+                <input name="nom" autocomplete="name" required>
+              </label>
+              <label>Email
+                <input name="email" type="email" autocomplete="email" required>
+              </label>
+            </div>
+            <div class="duo">
+              <label>Téléphone <span style="letter-spacing:0;text-transform:none">(facultatif)</span>
+                <input name="tel" type="tel" autocomplete="tel">
+              </label>
+              <label>Format
+                <select name="format" id="format">
+                  <option>Landing page</option>
+                  <option>Site vitrine</option>
+                </select>
+              </label>
+            </div>
+            <label>Activité et ville
+              <input name="activite" placeholder="Cabinet d’ostéopathie à Nantes" required>
+            </label>
+            <label>Site actuel, si vous en avez un
+              <input name="site" placeholder="https://">
+            </label>
+            <label>Ce que le site doit obtenir
+              <textarea name="message" placeholder="Prises de rendez-vous, appels, présentation de l’offre…" required></textarea>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="contenus">
+              <span>Je peux envoyer les textes et les photos aujourd’hui.</span>
+            </label>
+          </div>
+          <p class="form-error" id="formError" role="alert"></p>
+          <div class="form-foot">
+            <button class="btn" type="submit">Envoyer la demande</button>
+            <span style="color:var(--muted);font-size:.88rem">Réponse sous une heure</span>
+          </div>
+          <div class="success" id="success">
+            <h3>Demande prête.</h3>
+            <p id="successText">Je vous réponds avec le cadre. Le forfait se règle à la mise en ligne.</p>
+            <pre class="recap" id="recap"></pre>
+            <div class="price-actions">
+              <a class="btn" id="mailGo" href="#">Ouvrir l’email</a>
+              <button class="btn btn-line" type="button" id="copyBtn">Copier le message</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>Farineau · Maxime Farineau · sites livrés dans la journée</span>
+      <span>Landing 400&nbsp;€ · Vitrine 600&nbsp;€</span>
+    </div>
+  </footer>
+
+  <div class="dock">
+    <div>
+      <b>400 / 600&nbsp;€</b>
+      <span>Landing / vitrine</span>
+    </div>
+    <a class="btn btn-light" href="#contact">Démarrer</a>
+  </div>
+
+  <style>
+    .sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+  </style>
+
+  <script>
+    /* ——— À REMPLIR AVANT D’ENVOYER LA PAGE ——— */
+    const CONFIG = {
+      email: "REMPLACEZ_MOI@email.com",
+      whatsapp: "",
+      paymentUrl: "",
+      person: "Maxime Farineau"
+    };
+
+    const header = document.getElementById("header");
+    const nav = document.getElementById("nav");
+    const navToggle = document.getElementById("navToggle");
+    const setup = document.getElementById("setup");
+    const form = document.getElementById("form");
+    const formatSelect = document.getElementById("format");
+    const offers = document.querySelectorAll(".offer");
+    const slot = document.getElementById("slot");
+    const directLine = document.getElementById("directLine");
+    const payLink = document.getElementById("payLink");
+
+    const emailReady = CONFIG.email && !CONFIG.email.startsWith("REMPLACEZ_MOI");
+    if (!emailReady) setup.classList.add("is-on");
+
+    if (CONFIG.paymentUrl) {
+      payLink.hidden = false;
+      payLink.href = CONFIG.paymentUrl;
+    }
+
+    const bits = [];
+    if (emailReady) bits.push(`<a href="mailto:${CONFIG.email}">${CONFIG.email}</a>`);
+    if (CONFIG.whatsapp) {
+      const wa = CONFIG.whatsapp.replace(/\D/g, "");
+      bits.push(`<a href="https://wa.me/${wa}" target="_blank" rel="noopener">WhatsApp</a>`);
+    }
+    directLine.innerHTML = bits.length ? "Écrire directement : " + bits.join(" · ") : "";
+
+    function paintSlot() {
+      const now = new Date();
+      const jour = now.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+      const heure = now.getHours();
+      const label = jour.charAt(0).toUpperCase() + jour.slice(1);
+      if (heure < 11) {
+        slot.textContent = `${label}. Commande avant 11 h, contenus inclus : mise en ligne ce soir.`;
+      } else {
+        slot.textContent = `${label}, ${heure} h. Une commande maintenant est livrée demain avant midi.`;
+      }
+    }
+    paintSlot();
+
+    function selectOffer(name) {
+      offers.forEach((btn) => {
+        const on = btn.dataset.offer === name;
+        btn.classList.toggle("is-on", on);
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+        const choose = btn.querySelector(".choose");
+        choose.textContent = on ? "Format retenu" : "Choisir ce format";
+      });
+      formatSelect.value = name;
+    }
+    offers.forEach((btn) => {
+      btn.addEventListener("click", () => selectOffer(btn.dataset.offer));
+    });
+
+    navToggle.addEventListener("click", () => {
+      const open = nav.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.classList.toggle("nav-open", open);
+    });
+    nav.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        nav.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-open");
+      });
+    });
+
+    const dock = document.querySelector(".dock");
+    addEventListener("scroll", () => {
+      header.classList.toggle("is-on", scrollY > 8);
+      dock.classList.toggle("is-on", scrollY > window.innerHeight * 0.72);
+    }, { passive: true });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const nom = String(data.get("nom") || "").trim();
+      const email = String(data.get("email") || "").trim();
+      const tel = String(data.get("tel") || "").trim();
+      const format = String(data.get("format") || "").trim();
+      const activite = String(data.get("activite") || "").trim();
+      const site = String(data.get("site") || "").trim();
+      const message = String(data.get("message") || "").trim();
+      const contenus = data.get("contenus") ? "oui" : "non";
+      const error = document.getElementById("formError");
+
+      if (!nom || !activite || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        error.textContent = "Indiquez votre nom, un email valide, votre activité et ce que le site doit obtenir.";
+        error.classList.add("is-on");
+        return;
+      }
+      error.classList.remove("is-on");
+
+      const body = [
+        `Bonjour ${CONFIG.person},`,
+        "",
+        "Je commande un site livré dans la journée.",
+        "",
+        `Nom : ${nom}`,
+        `Email : ${email}`,
+        `Téléphone : ${tel || "—"}`,
+        `Format : ${format}`,
+        `Activité : ${activite}`,
+        `Site actuel : ${site || "—"}`,
+        `Contenus prêts aujourd’hui : ${contenus}`,
+        "",
+        message,
+        "",
+        "Forfait : " + (format === "Site vitrine" ? "600 €" : "400 €") + ", réglé à la livraison."
+      ].join("\n");
+
+      const subject = encodeURIComponent(`Commande — ${format} — ${nom}`);
+      const href = `mailto:${emailReady ? CONFIG.email : email}?subject=${subject}&body=${encodeURIComponent(body)}`;
+      document.getElementById("recap").textContent = body;
+      document.getElementById("mailGo").href = href;
+      document.getElementById("successText").textContent = emailReady
+        ? "Le message est prêt. Envoyez-le : je réponds avec le cadre. Le forfait se règle à la livraison."
+        : "Le message est prêt. Ouvrez l’email, ou copiez-le et envoyez-le.";
+      form.classList.add("is-done");
+      document.getElementById("success").classList.add("is-on");
+      document.getElementById("copyBtn").onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(body);
+          document.getElementById("copyBtn").textContent = "Message copié";
+        } catch (e) {
+          document.getElementById("copyBtn").textContent = "Copie indisponible";
+        }
+      };
+    });
+  </script>
+</body>
+</html>
