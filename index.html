@@ -211,6 +211,7 @@
       transition: background 0.25s var(--ease), transform 0.25s var(--ease);
     }
     .btn:hover { background: var(--forest-2); }
+    .btn:disabled { opacity: 0.65; cursor: progress; }
     .btn:focus-visible, a:focus-visible, button:focus-visible, summary:focus-visible {
       outline: 2px solid var(--forest);
       outline-offset: 3px;
@@ -849,10 +850,6 @@
     <rect width="100%" height="100%" filter="url(#grain)"/>
   </svg>
 
-  <div class="setup" id="setup">
-    Avant d’envoyer cette page à un client : ouvrez <code>index.html</code>, cherchez <code>CONFIG</code>, et indiquez votre email. Le bandeau disparaît ensuite.
-  </div>
-
   <header class="header" id="header">
     <div class="wrap-l">
       <a class="brand" href="#top">
@@ -1145,13 +1142,8 @@
             <span style="color:var(--muted);font-size:.88rem">Réponse sous une heure</span>
           </div>
           <div class="success" id="success">
-            <h3>Demande prête.</h3>
-            <p id="successText">Je vous réponds avec le cadre. Le forfait se règle à la mise en ligne.</p>
-            <pre class="recap" id="recap"></pre>
-            <div class="price-actions">
-              <a class="btn" id="mailGo" href="#">Ouvrir l’email</a>
-              <button class="btn btn-line" type="button" id="copyBtn">Copier le message</button>
-            </div>
+            <h3>Demande envoyée.</h3>
+            <p id="successText">Je vous réponds sous une heure, avec le cadre et le moyen de régler le forfait à la livraison.</p>
           </div>
         </form>
       </div>
@@ -1187,18 +1179,14 @@
   </style>
 
   <script>
-    /* ——— À REMPLIR AVANT D’ENVOYER LA PAGE ——— */
     const CONFIG = {
-      email: "REMPLACEZ_MOI@email.com",
       whatsapp: "",
-      paymentUrl: "",
-      person: "Maxime Farineau"
+      paymentUrl: ""
     };
 
     const header = document.getElementById("header");
     const nav = document.getElementById("nav");
     const navToggle = document.getElementById("navToggle");
-    const setup = document.getElementById("setup");
     const form = document.getElementById("form");
     const formatSelect = document.getElementById("format");
     const offers = document.querySelectorAll(".offer");
@@ -1206,21 +1194,15 @@
     const directLine = document.getElementById("directLine");
     const payLink = document.getElementById("payLink");
 
-    const emailReady = CONFIG.email && !CONFIG.email.startsWith("REMPLACEZ_MOI");
-    if (!emailReady) setup.classList.add("is-on");
-
     if (CONFIG.paymentUrl) {
       payLink.hidden = false;
       payLink.href = CONFIG.paymentUrl;
     }
 
-    const bits = [];
-    if (emailReady) bits.push(`<a href="mailto:${CONFIG.email}">${CONFIG.email}</a>`);
     if (CONFIG.whatsapp) {
       const wa = CONFIG.whatsapp.replace(/\D/g, "");
-      bits.push(`<a href="https://wa.me/${wa}" target="_blank" rel="noopener">WhatsApp</a>`);
+      directLine.innerHTML = `Écrire directement : <a href="https://wa.me/${wa}" target="_blank" rel="noopener">WhatsApp</a>`;
     }
-    directLine.innerHTML = bits.length ? "Écrire directement : " + bits.join(" · ") : "";
 
     function paintSlot() {
       const now = new Date();
@@ -1268,7 +1250,7 @@
       dock.classList.toggle("is-on", scrollY > window.innerHeight * 0.72);
     }, { passive: true });
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = new FormData(form);
       const nom = String(data.get("nom") || "").trim();
@@ -1278,8 +1260,8 @@
       const activite = String(data.get("activite") || "").trim();
       const site = String(data.get("site") || "").trim();
       const message = String(data.get("message") || "").trim();
-      const contenus = data.get("contenus") ? "oui" : "non";
       const error = document.getElementById("formError");
+      const submit = form.querySelector("[type=submit]");
 
       if (!nom || !activite || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         error.textContent = "Indiquez votre nom, un email valide, votre activité et ce que le site doit obtenir.";
@@ -1287,42 +1269,40 @@
         return;
       }
       error.classList.remove("is-on");
+      submit.disabled = true;
+      submit.textContent = "Envoi…";
 
-      const body = [
-        `Bonjour ${CONFIG.person},`,
-        "",
-        "Je commande un site livré dans la journée.",
-        "",
-        `Nom : ${nom}`,
-        `Email : ${email}`,
-        `Téléphone : ${tel || "—"}`,
-        `Format : ${format}`,
-        `Activité : ${activite}`,
-        `Site actuel : ${site || "—"}`,
-        `Contenus prêts aujourd’hui : ${contenus}`,
-        "",
-        message,
-        "",
-        "Forfait : " + (format === "Site vitrine" ? "600 €" : "400 €") + ", réglé à la livraison."
-      ].join("\n");
-
-      const subject = encodeURIComponent(`Commande — ${format} — ${nom}`);
-      const href = `mailto:${emailReady ? CONFIG.email : email}?subject=${subject}&body=${encodeURIComponent(body)}`;
-      document.getElementById("recap").textContent = body;
-      document.getElementById("mailGo").href = href;
-      document.getElementById("successText").textContent = emailReady
-        ? "Le message est prêt. Envoyez-le : je réponds avec le cadre. Le forfait se règle à la livraison."
-        : "Le message est prêt. Ouvrez l’email, ou copiez-le et envoyez-le.";
-      form.classList.add("is-done");
-      document.getElementById("success").classList.add("is-on");
-      document.getElementById("copyBtn").onclick = async () => {
-        try {
-          await navigator.clipboard.writeText(body);
-          document.getElementById("copyBtn").textContent = "Message copié";
-        } catch (e) {
-          document.getElementById("copyBtn").textContent = "Copie indisponible";
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nom,
+            email,
+            tel,
+            format,
+            activite,
+            site,
+            message,
+            contenus: Boolean(data.get("contenus"))
+          })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          error.textContent = result.error || "L’envoi a échoué. Réessayez dans un instant.";
+          error.classList.add("is-on");
+          submit.disabled = false;
+          submit.textContent = "Envoyer la demande";
+          return;
         }
-      };
+        form.classList.add("is-done");
+        document.getElementById("success").classList.add("is-on");
+      } catch (e) {
+        error.textContent = "L’envoi a échoué. Vérifiez votre connexion et réessayez.";
+        error.classList.add("is-on");
+        submit.disabled = false;
+        submit.textContent = "Envoyer la demande";
+      }
     });
   </script>
 </body>
